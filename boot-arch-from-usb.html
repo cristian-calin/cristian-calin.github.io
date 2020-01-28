@@ -1,0 +1,20 @@
+Modify the cmdline.txt root entry to
+
+```bash
+root=PARTUUID=24da48ba-02
+```
+
+Change the 2 lines in /etc/fstab to
+
+```bash
+PARTUUID=24da48ba-01  /boot           vfat    defaults          0       2
+PARTUUID=24da48ba-02  /               ext4    defaults,noatime  0       1
+```
+
+NOTE the console=ttyAMA0,115200 is NOT NEEDED if you are not using a serial console. The kernel debugger is also connected to this port kgdboc=ttyAMA0,115200 and is definitely NOT needed!
+
+For reference, the following is my cmdline.txt:
+
+```bash
+dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=c49c1da4-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+```
